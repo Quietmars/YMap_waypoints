@@ -1,0 +1,27 @@
+doctype html
+html(lang="ru")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        title="Rout Map Editor"
+        link(href='/css/style.css', rel='stylesheet')
+
+    body
+
+        div(class="content")
+
+            div(class="content__input")
+
+                //input
+                include ../../components/input/index
+                //input end
+
+                div(class="content__points")
+                    //points
+                    include ../../components/points/index
+                    //points end
+            
+            div(class="content__map")
+                //map
+                include ../../components/map/index
+                //map end

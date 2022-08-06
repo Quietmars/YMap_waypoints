@@ -1,0 +1,33 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
+.button
+    cursor: pointer
+    padding: 0
+    margin: 0
+    border: 1px #000000 solid
+    background-color: #cfcfcf
+
+.button:hover
+    background-color: #f4f4f4
+
+.button_delete
+    width: 20px
+    height: 20px
+    position: relative
+
+.button_delete:before, .button_delete:after 
+    content: ""
+    position: absolute
+    width: 14px
+    height: 4px
+    background: #000000
+    left: 2px
+    top: 7px
+    box-sizing: border-box
+
+.button_delete:before 
+    transform: rotate(45deg)
+
+.button_delete:after 
+    transform: rotate(-45deg)

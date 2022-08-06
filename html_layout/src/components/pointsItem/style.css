@@ -1,0 +1,18 @@
+.point {
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  grid-template-rows: 1fr;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 0 10px 0;
+  cursor: pointer;
+}
+
+.point:hover {
+  background-color: #f1f1f1;
+}
