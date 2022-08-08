@@ -4,11 +4,11 @@ import './style.sass'
 import { Button } from "../../components/button"
 
 
-export const PointsItem = ({title}) => {
+export const PointsItem = ({ title, handleDeletePoint }) => {
 
     return <div className="point">
         <div>{title}</div>
-        <Button />
+        <Button handleDeletePoint={() => handleDeletePoint()} />
     </div>
 
 }
