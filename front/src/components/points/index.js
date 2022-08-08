@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import './style.sass'
 import { ctx } from "../../store"
 
@@ -8,13 +8,16 @@ export const Points = () => {
 
     const { store } = useContext(ctx)
 
-    const renderPoins = (points) => {
-        return points.list.map((pointId) => {
-            return <PointsItem
-                key = {points.items[pointId].id}
-                title={points.items[pointId].title} />
-        })
+    const renderPointsList = (pointsCollection) => {
+        if (pointsCollection) {
+            return pointsCollection.toArray().map((point) => {
+                return <PointsItem
+                    key={point.properties.get('id')}
+                    title={point.properties.get('balloonContent')} />
+            })
+        }
+        return <></>
     }
 
-    return renderPoins(store.points)
+    return renderPointsList(store.pointsCollection)
 }
