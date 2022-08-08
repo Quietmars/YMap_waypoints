@@ -22,22 +22,20 @@ export const Map = () => {
         }, { strokeWidth: 4 });
     }
 
-    const transformPolyline = (e, pointsCollection) => {
-        console.log(e)
+    const transformPolyline = (e) => {
+        if (store.pointsCollection) {
+            const coordinates = store.pointsCollection.toArray().map((point) => {
+                return point.geometry.getCoordinates()
+            })
+            store.polyline.geometry.setCoordinates(coordinates)
+        }
     }
 
     const createPointsCollection = () => {
-        const pointsCollection = new ymaps.GeoObjectCollection({}, {
+        return new ymaps.GeoObjectCollection({}, {
             preset: 'islands#redIcon',
             draggable: true
         })
-        pointsCollection.events.add('set', (e) => transformPolyline(pointsCollection))
-        pointsCollection.events.add('add', (e) => transformPolyline(pointsCollection))
-        pointsCollection.events.add('remove', (e) => transformPolyline(pointsCollection))
-        pointsCollection.events.add('geometrychange', (e) => transformPolyline(pointsCollection))
-        pointsCollection.events.add('dragend', (e) => transformPolyline(pointsCollection))
-
-        return pointsCollection
     }
 
     useEffect(() => {
@@ -50,10 +48,24 @@ export const Map = () => {
                 map.geoObjects.add(pointsCollection)
                 map.geoObjects.add(polyline)
 
-                updStore({ ...store, ...{ map: map, pointsCollection: pointsCollection} })
+                updStore({ ...store, ...{ map: map, polyline: polyline, pointsCollection: pointsCollection } })
             }
         })
-    }, [])
+        if (store.pointsCollection) {
+            const transformPolylineEvent = (e) => transformPolyline(e)
+            store.pointsCollection.events.add('add', transformPolylineEvent)
+            store.pointsCollection.events.add('geometrychange', transformPolylineEvent)
+            store.pointsCollection.events.add('remove', transformPolylineEvent)
+            //store.pointsCollection.events.add('set', transformPolylineEvent)
+            //store.pointsCollection.events.add('dragend', transformPolylineEvent)
+            
+            return () => {
+                store.pointsCollection.events.remove('add', transformPolylineEvent)
+                store.pointsCollection.events.remove('geometrychange', transformPolylineEvent)
+                store.pointsCollection.events.remove('remove', transformPolylineEvent)
+            }
+        }
+    },[store])
 
     return (<>
         <div id="map" className="map" />
