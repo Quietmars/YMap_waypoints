@@ -1,6 +1,10 @@
 @import ../../css/mixins.sass
 @import ../../css/variables.sass
 
+.point-wrap
+	display: block
+	height: 1.6rem
+
 .point
 	display: grid
 	grid-template-columns: 1fr 20px
@@ -10,6 +14,12 @@
 	box-sizing: border-box
 	margin: 0 0 10px 0
 	cursor: pointer
+
+.point_hide
+	display: none
+
+.point_hovered
+	border: 2px #2c45ff solid
 
 .point:hover
 	background-color: #f1f1f1

@@ -27,7 +27,8 @@ export const Input = () => {
                     }
                 }, {});
     
-            updStore({...store, ...store.pointsCollection.add(newPoint) })
+            updStore({ ...store, ...store.pointsCollection.add(newPoint) })
+            setInputValue('')
         }
     }
 
