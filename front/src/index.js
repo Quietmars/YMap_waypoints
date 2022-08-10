@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { initialState } from './store';
 import { ctx } from './store';
@@ -19,4 +20,5 @@ const App = () => {
     </ctx.Provider>
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const root = createRoot(document.getElementById("app"))
+root.render(<App />)
